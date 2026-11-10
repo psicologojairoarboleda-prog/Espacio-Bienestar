@@ -21,7 +21,7 @@
         .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 6px; }
         .menu-btn span { display: block; width: 24px; height: 3px; background-color: #2C2C2C; border-radius: 2px; }
         .site-title { font-size: 24px; font-weight: 700; color: #1A1A1A; cursor: pointer; }
-        .user-avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid #D1D1CB; background: #f0ecf6; }
+        .user-avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid #D1D1CB; }
         .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
         .search-bar-container { background: #F4F4F0; border-top: 1px solid #E5E5E0; padding: 12px 20px; }
@@ -50,6 +50,7 @@
         .badge { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
         .badge-mindfulness { background: #f0ecf6; color: #6b5b95; }
         .badge-somatic { background: #e0f2fe; color: #0369a1; }
+        .badge-cuadrada { background: #fef3c7; color: #b45309; }
         .badge-recetas { background: #EAF3EC; color: #1E5128; }
         .carousel-title { font-size: 16px; font-weight: 700; color: #1A1A1A; }
 
@@ -82,7 +83,7 @@
                 <h1 class="site-title" onclick="resetView()">Centro de Bienestar</h1>
             </div>
             <div class="user-avatar" title="Jairo Arboleda">
-                <span style="font-size: 20px;">🧠</span>
+                <img src="LOGO.jpeg" alt="Logo Jairo Arboleda">
             </div>
         </div>
         <div class="search-bar-container">
@@ -105,7 +106,8 @@
                     <button onclick="filterCategory('todos'); toggleMenu();">Todas las aplicaciones</button>
                     <button onclick="filterCategory('mindfulness'); toggleMenu();">1. Mindfulness & Atención</button>
                     <button onclick="filterCategory('somatico'); toggleMenu();">2. Regulación Somática</button>
-                    <button onclick="filterCategory('nutricion'); toggleMenu();">3. Salud Nutricional</button>
+                    <button onclick="filterCategory('respiracion'); toggleMenu();">3. Respiración Guiada</button>
+                    <button onclick="filterCategory('nutricion'); toggleMenu();">4. Salud Nutricional</button>
                 </nav>
             </div>
             <p style="font-size: 11px; color: #888; text-align: center;">Salud mental, cognitiva y física</p>
@@ -146,6 +148,17 @@
                     </div>
                 </a>
 
+                <a href="https://psicologojairoarboleda-prog.github.io/Respiraci-n-Cuadrada/" class="carousel-card">
+                    <div class="carousel-img bg-cuadrada">🟦</div>
+                    <div class="carousel-body">
+                        <div>
+                            <span class="badge badge-cuadrada">Respiración</span>
+                            <h3 class="carousel-title">Respiración Cuadrada</h3>
+                        </div>
+                        <p style="font-size: 11px; color: #777; margin-top: 10px;">✨ Control de ansiedad y calma</p>
+                    </div>
+                </a>
+
                 <a href="recetas.html" class="carousel-card">
                     <div class="carousel-img bg-recetas">🥗</div>
                     <div class="carousel-body">
@@ -164,10 +177,10 @@
             <h2 class="section-title serif" id="sectionTitle">Todas las Aplicaciones</h2>
         </div>
 
-        <!-- Cuadrícula Escalable (Aquí puedes agregar más tarjetas fácilmente) -->
+        <!-- Cuadrícula Escalable -->
         <div class="grid-recipes" id="recipesGrid">
             
-            <!-- App 1 -->
+            <!-- App 1: Mindfulness -->
             <a href="https://psicologojairoarboleda-prog.github.io/Mindfulnes-5-4-3-2-1/" class="recipe-card" data-category="mindfulness" data-title="tecnica mindfulness 5-4-3-2-1">
                 <div class="recipe-img-container">
                     🧘‍♀️
@@ -182,7 +195,7 @@
                 </div>
             </a>
 
-            <!-- App 2 -->
+            <!-- App 2: Somático -->
             <a href="https://psicologojairoarboleda-prog.github.io/Sincronizaci-n-Som-tica/" class="recipe-card" data-category="somatico" data-title="regulacion somatica srs">
                 <div class="recipe-img-container">
                     🌊
@@ -197,7 +210,22 @@
                 </div>
             </a>
 
-            <!-- App 3 -->
+            <!-- App 3: Respiración Cuadrada -->
+            <a href="https://psicologojairoarboleda-prog.github.io/Respiraci-n-Cuadrada/" class="recipe-card" data-category="respiracion" data-title="respiracion cuadrada respiracion quadratica">
+                <div class="recipe-img-container">
+                    🟦
+                </div>
+                <div class="recipe-content">
+                    <div>
+                        <span class="badge badge-cuadrada">Respiración</span>
+                        <h3 class="recipe-title serif">Respiración Cuadrada</h3>
+                        <p style="font-size: 13px; color: #666;">Técnica de 4 tiempos para estabilizar el sistema nervioso y enfocar la mente.</p>
+                    </div>
+                    <div class="recipe-meta"><span>⏱️ Control de ritmo</span><span style="color: #b45309; font-weight: 600;">Abrir app →</span></div>
+                </div>
+            </a>
+
+            <!-- App 4: Recetario -->
             <a href="recetas.html" class="recipe-card" data-category="nutricion" data-title="recetas funcionales salud visual">
                 <div class="recipe-img-container">
                     🥗
@@ -212,21 +240,6 @@
                 </div>
             </a>
 
-            <!-- 💡 PLANTILLA ESCALABLE PARA FUTURAS APPS: Solo copia y pega esto abajo cuando crees una nueva -->
-            <!--
-            <a href="TU_NUEVA_URL.html" class="recipe-card" data-category="mindfulness" data-title="nombre de la app">
-                <div class="recipe-img-container">✨</div>
-                <div class="recipe-content">
-                    <div>
-                        <span class="badge badge-mindfulness">Categoría</span>
-                        <h3 class="recipe-title serif">Nombre de la Nueva App</h3>
-                        <p style="font-size: 13px; color: #666;">Breve descripción de lo que hace esta nueva herramienta.</p>
-                    </div>
-                    <div class="recipe-meta"><span>⏱️ Interactivo</span><span style="color: #6b5b95; font-weight: 600;">Abrir app →</span></div>
-                </div>
-            </a>
-            -->
-
         </div>
     </main>
 
@@ -238,19 +251,16 @@
     </footer>
 
     <script>
-        // Funcionalidad de Menú Lateral
         function toggleMenu() {
             const menu = document.getElementById('sideMenu');
             menu.classList.toggle('active');
         }
 
-        // Funcionalidad de Carrusel
         function scrollCarousel(direction) {
             const container = document.getElementById('carouselContainer');
             container.scrollBy({ left: direction * 320, behavior: 'smooth' });
         }
 
-        // Buscador interactivo en tiempo real
         function handleSearch(query) {
             const filter = query.toLowerCase().trim();
             const cards = document.querySelectorAll('.recipe-card');
@@ -265,7 +275,6 @@
             });
         }
 
-        // Filtrado por categoría desde el menú lateral
         function filterCategory(category) {
             const cards = document.querySelectorAll('.recipe-card');
             const sectionTitle = document.getElementById('sectionTitle');
@@ -276,6 +285,8 @@
                 sectionTitle.textContent = "Mindfulness & Atención";
             } else if (category === 'somatico') {
                 sectionTitle.textContent = "Regulación Somática";
+            } else if (category === 'respiracion') {
+                sectionTitle.textContent = "Respiración Guiada";
             } else if (category === 'nutricion') {
                 sectionTitle.textContent = "Salud Nutricional";
             }
