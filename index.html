@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Aplicaciones - Bienestar Integral</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Open Sans', sans-serif; background-color: #FBFBF9; color: #2C2C2C; line-height: 1.6; }
+        h1, h2, h3, .serif { font-family: 'Playfair Display', serif; }
+        
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #F4F4F0; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #D1D1CB; border-radius: 4px; transition: background 0.2s; }
+        ::-webkit-scrollbar-thumb:hover { background: #6b5b95; }
+
+        header { background: #fff; border-bottom: 1px solid #E5E5E0; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+        .nav-title { display: flex; align-items: center; gap: 16px; }
+        .menu-btn { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 6px; }
+        .menu-btn span { display: block; width: 24px; height: 3px; background-color: #2C2C2C; border-radius: 2px; }
+        .site-title { font-size: 24px; font-weight: 700; color: #1A1A1A; cursor: pointer; }
+        .user-avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; border: 1px solid #D1D1CB; background: #f0ecf6; }
+        .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+        .search-bar-container { background: #F4F4F0; border-top: 1px solid #E5E5E0; padding: 12px 20px; }
+        .search-inner { max-width: 700px; margin: 0 auto; position: relative; }
+        .search-inner input { width: 100%; padding: 12px 20px 12px 45px; border-radius: 30px; border: 1px solid #D1D1CB; font-size: 14px; outline: none; background: #fff; }
+        .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; color: #777; }
+
+        #sideMenu { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; display: none; }
+        #sideMenu.active { display: flex; }
+        .drawer { background: #fff; width: 300px; height: 100%; padding: 24px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 4px 0 15px rgba(0,0,0,0.1); }
+        .drawer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid #E5E5E0; padding-bottom: 12px; }
+        .close-drawer { background: none; border: none; font-size: 22px; cursor: pointer; }
+        .drawer-nav button { width: 100%; text-align: left; background: none; border: none; padding: 12px 16px; font-size: 15px; font-weight: 600; color: #444; border-radius: 8px; cursor: pointer; margin-bottom: 6px; transition: background 0.2s; }
+        .drawer-nav button:hover { background: #f0ecf6; color: #6b5b95; }
+
+        main { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .section-title { font-size: 26px; font-weight: 700; margin-bottom: 20px; border-bottom: 2px solid #6b5b95; padding-bottom: 8px; display: inline-block; }
+
+        /* Carrusel de Destacadas */
+        .carousel-wrapper { position: relative; margin-bottom: 50px; }
+        .carousel { display: flex; gap: 20px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 10px; }
+        .carousel-card { min-width: 300px; max-width: 300px; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #E5E5E0; cursor: pointer; flex-shrink: 0; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+        .carousel-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+        .carousel-img { height: 180px; width: 100%; object-fit: cover; background: #f0f0ed; display: flex; align-items: center; justify-content: center; font-size: 50px; }
+        .carousel-body { padding: 16px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .badge { font-size: 10px; font-weight: 700; text-transform: uppercase; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+        .badge-mindfulness { background: #f0ecf6; color: #6b5b95; }
+        .badge-somatic { background: #e0f2fe; color: #0369a1; }
+        .badge-recetas { background: #EAF3EC; color: #1E5128; }
+        .carousel-title { font-size: 16px; font-weight: 700; color: #1A1A1A; }
+
+        /* Cuadrícula General de Aplicaciones (Escalable) */
+        .grid-recipes { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .recipe-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #E5E5E0; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; }
+        .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
+        .recipe-img-container { height: 200px; width: 100%; overflow: hidden; background: #f0f0ed; display: flex; align-items: center; justify-content: center; font-size: 60px; }
+        .recipe-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+        .recipe-card:hover .recipe-img { transform: scale(1.05); }
+        .recipe-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+        .recipe-title { font-size: 18px; font-weight: 700; color: #1A1A1A; margin-top: 8px; margin-bottom: 12px; }
+        .recipe-title:hover { color: #6b5b95; }
+        .recipe-meta { font-size: 12px; color: #666; display: flex; justify-content: space-between; border-top: 1px solid #F0F0EE; padding-top: 12px; }
+
+        footer { background: #333333; color: #E0E0E0; text-align: center; padding: 40px 20px; margin-top: 60px; font-size: 13px; }
+        footer p { margin-bottom: 8px; }
+        footer a { color: #A3E4D7; text-decoration: none; font-weight: 600; }
+        footer a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <div class="nav-title">
+                <button class="menu-btn" onclick="toggleMenu()" aria-label="Abrir Menú">
+                    <span></span><span></span><span></span>
+                </button>
+                <h1 class="site-title" onclick="resetView()">Centro de Bienestar</h1>
+            </div>
+            <div class="user-avatar" title="Jairo Arboleda">
+                <span style="font-size: 20px;">🧠</span>
+            </div>
+        </div>
+        <div class="search-bar-container">
+            <div class="search-inner">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Buscar herramienta, técnica..." oninput="handleSearch(this.value)">
+            </div>
+        </div>
+    </header>
+
+    <!-- Menú Lateral Desplegable -->
+    <div id="sideMenu" onclick="if(event.target === this) toggleMenu()">
+        <div class="drawer">
+            <div>
+                <div class="drawer-header">
+                    <h2 class="serif" style="font-size: 20px;">Navegación</h2>
+                    <button class="close-drawer" onclick="toggleMenu()">✕</button>
+                </div>
+                <nav class="drawer-nav">
+                    <button onclick="filterCategory('todos'); toggleMenu();">Todas las aplicaciones</button>
+                    <button onclick="filterCategory('mindfulness'); toggleMenu();">1. Mindfulness & Atención</button>
+                    <button onclick="filterCategory('somatico'); toggleMenu();">2. Regulación Somática</button>
+                    <button onclick="filterCategory('nutricion'); toggleMenu();">3. Salud Nutricional</button>
+                </nav>
+            </div>
+            <p style="font-size: 11px; color: #888; text-align: center;">Salud mental, cognitiva y física</p>
+        </div>
+    </div>
+
+    <main>
+        <!-- Carrusel de Destacadas -->
+        <section class="carousel-wrapper" id="carouselWrapper">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h2 class="serif" style="font-size: 22px;">Herramientas Destacadas</h2>
+                <div style="display: flex; gap: 8px;">
+                    <button onclick="scrollCarousel(-1)" style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ccc; background:#fff; cursor:pointer;">‹</button>
+                    <button onclick="scrollCarousel(1)" style="width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ccc; background:#fff; cursor:pointer;">›</button>
+                </div>
+            </div>
+            <div class="carousel" id="carouselContainer">
+                
+                <a href="https://psicologojairoarboleda-prog.github.io/Mindfulnes-5-4-3-2-1/" class="carousel-card">
+                    <div class="carousel-img bg-mindfulness">🧘‍♀️</div>
+                    <div class="carousel-body">
+                        <div>
+                            <span class="badge badge-mindfulness">Mindfulness</span>
+                            <h3 class="carousel-title">Técnica Mindfulness 5-4-3-2-1</h3>
+                        </div>
+                        <p style="font-size: 11px; color: #777; margin-top: 10px;">✨ Anclaje sensorial guiado</p>
+                    </div>
+                </a>
+
+                <a href="https://psicologojairoarboleda-prog.github.io/Sincronizaci-n-Som-tica/" class="carousel-card">
+                    <div class="carousel-img bg-somatic">🌊</div>
+                    <div class="carousel-body">
+                        <div>
+                            <span class="badge badge-somatic">Somático</span>
+                            <h3 class="carousel-title">Regulación Somática (SRS)</h3>
+                        </div>
+                        <p style="font-size: 11px; color: #777; margin-top: 10px;">✨ Pelota interactiva y ciclos</p>
+                    </div>
+                </a>
+
+                <a href="recetas.html" class="carousel-card">
+                    <div class="carousel-img bg-recetas">🥗</div>
+                    <div class="carousel-body">
+                        <div>
+                            <span class="badge badge-recetas">Nutrición</span>
+                            <h3 class="carousel-title">Recetario Funcional Salud Visual</h3>
+                        </div>
+                        <p style="font-size: 11px; color: #777; margin-top: 10px;">✨ Cocina para la mente y visión</p>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center;">
+            <h2 class="section-title serif" id="sectionTitle">Todas las Aplicaciones</h2>
+        </div>
+
+        <!-- Cuadrícula Escalable (Aquí puedes agregar más tarjetas fácilmente) -->
+        <div class="grid-recipes" id="recipesGrid">
+            
+            <!-- App 1 -->
+            <a href="https://psicologojairoarboleda-prog.github.io/Mindfulnes-5-4-3-2-1/" class="recipe-card" data-category="mindfulness" data-title="tecnica mindfulness 5-4-3-2-1">
+                <div class="recipe-img-container">
+                    🧘‍♀️
+                </div>
+                <div class="recipe-content">
+                    <div>
+                        <span class="badge badge-mindfulness">Mindfulness</span>
+                        <h3 class="recipe-title serif">Técnica Mindfulness 5-4-3-2-1</h3>
+                        <p style="font-size: 13px; color: #666;">Ejercicio guiado de anclaje al presente con audios y sonidos naturales.</p>
+                    </div>
+                    <div class="recipe-meta"><span>⏱️ Práctica activa</span><span style="color: #6b5b95; font-weight: 600;">Abrir app →</span></div>
+                </div>
+            </a>
+
+            <!-- App 2 -->
+            <a href="https://psicologojairoarboleda-prog.github.io/Sincronizaci-n-Som-tica/" class="recipe-card" data-category="somatico" data-title="regulacion somatica srs">
+                <div class="recipe-img-container">
+                    🌊
+                </div>
+                <div class="recipe-content">
+                    <div>
+                        <span class="badge badge-somatic">Somático</span>
+                        <h3 class="recipe-title serif">Regulación Somática (SRS)</h3>
+                        <p style="font-size: 13px; color: #666;">Ciclos de respiración y presión con pelota somática interactiva.</p>
+                    </div>
+                    <div class="recipe-meta"><span>⏱️ Práctica guiada</span><span style="color: #0369a1; font-weight: 600;">Abrir app →</span></div>
+                </div>
+            </a>
+
+            <!-- App 3 -->
+            <a href="recetas.html" class="recipe-card" data-category="nutricion" data-title="recetas funcionales salud visual">
+                <div class="recipe-img-container">
+                    🥗
+                </div>
+                <div class="recipe-content">
+                    <div>
+                        <span class="badge badge-recetas">Nutrición</span>
+                        <h3 class="recipe-title serif">Recetario Funcional</h3>
+                        <p style="font-size: 13px; color: #666;">Alimentación funcional orientada a la salud visual, mental y cognitiva.</p>
+                    </div>
+                    <div class="recipe-meta"><span>⏱️ Recetario digital</span><span style="color: #1E5128; font-weight: 600;">Abrir app →</span></div>
+                </div>
+            </a>
+
+            <!-- 💡 PLANTILLA ESCALABLE PARA FUTURAS APPS: Solo copia y pega esto abajo cuando crees una nueva -->
+            <!--
+            <a href="TU_NUEVA_URL.html" class="recipe-card" data-category="mindfulness" data-title="nombre de la app">
+                <div class="recipe-img-container">✨</div>
+                <div class="recipe-content">
+                    <div>
+                        <span class="badge badge-mindfulness">Categoría</span>
+                        <h3 class="recipe-title serif">Nombre de la Nueva App</h3>
+                        <p style="font-size: 13px; color: #666;">Breve descripción de lo que hace esta nueva herramienta.</p>
+                    </div>
+                    <div class="recipe-meta"><span>⏱️ Interactivo</span><span style="color: #6b5b95; font-weight: 600;">Abrir app →</span></div>
+                </div>
+            </a>
+            -->
+
+        </div>
+    </main>
+
+    <footer>
+        <p style="font-weight: 700; color: #FFFFFF; font-size: 15px;">© Jairo Arboleda Psicólogo y Creador Digital</p>
+        <p style="color: #B2DFDB; font-weight: 600;">Herramientas Digitales Para La Salud Mental, Cognitiva y Física</p>
+        <p style="margin-top: 10px;">Instagram: <a href="https://www.instagram.com/psicologojairoarboleda?stkn=MXV2OTg4bjBrNG0yYQ==" target="_blank">@psicologojairoarboleda</a></p>
+        <p style="margin-top: 6px; color: #888; font-size: 12px;">Colombia 2026</p>
+    </footer>
+
+    <script>
+        // Funcionalidad de Menú Lateral
+        function toggleMenu() {
+            const menu = document.getElementById('sideMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Funcionalidad de Carrusel
+        function scrollCarousel(direction) {
+            const container = document.getElementById('carouselContainer');
+            container.scrollBy({ left: direction * 320, behavior: 'smooth' });
+        }
+
+        // Buscador interactivo en tiempo real
+        function handleSearch(query) {
+            const filter = query.toLowerCase().trim();
+            const cards = document.querySelectorAll('.recipe-card');
+            
+            cards.forEach(card => {
+                const title = card.getAttribute('data-title') || '';
+                if (title.includes(filter)) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Filtrado por categoría desde el menú lateral
+        function filterCategory(category) {
+            const cards = document.querySelectorAll('.recipe-card');
+            const sectionTitle = document.getElementById('sectionTitle');
+            
+            if (category === 'todos') {
+                sectionTitle.textContent = "Todas las Aplicaciones";
+            } else if (category === 'mindfulness') {
+                sectionTitle.textContent = "Mindfulness & Atención";
+            } else if (category === 'somatico') {
+                sectionTitle.textContent = "Regulación Somática";
+            } else if (category === 'nutricion') {
+                sectionTitle.textContent = "Salud Nutricional";
+            }
+
+            cards.forEach(card => {
+                const cat = card.getAttribute('data-category');
+                if (category === 'todos' || cat === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function resetView() {
+            filterCategory('todos');
+            document.getElementById('searchInput').value = '';
+        }
+    </script>
+</body>
+</html>
