@@ -54,13 +54,11 @@
         .badge-recetas { background: #EAF3EC; color: #1E5128; }
         .carousel-title { font-size: 16px; font-weight: 700; color: #1A1A1A; }
 
-        /* Cuadrícula General de Aplicaciones (Escalable) */
+        /* Cuadrícula General de Aplicaciones */
         .grid-recipes { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
         .recipe-card { background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #E5E5E0; display: flex; flex-direction: column; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; }
         .recipe-card:hover { transform: translateY(-4px); box-shadow: 0 10px 20px rgba(0,0,0,0.06); }
         .recipe-img-container { height: 200px; width: 100%; overflow: hidden; background: #f0f0ed; display: flex; align-items: center; justify-content: center; font-size: 60px; }
-        .recipe-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
-        .recipe-card:hover .recipe-img { transform: scale(1.05); }
         .recipe-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
         .recipe-title { font-size: 18px; font-weight: 700; color: #1A1A1A; margin-top: 8px; margin-bottom: 12px; }
         .recipe-title:hover { color: #6b5b95; }
@@ -159,7 +157,7 @@
                     </div>
                 </a>
 
-                <a href="recetas.html" class="carousel-card">
+                <a href="https://psicologojairoarboleda-prog.github.io/Recetario-alimentaci-n-funcional-orientada-a-la-salud-visual/" class="carousel-card">
                     <div class="carousel-img bg-recetas">🥗</div>
                     <div class="carousel-body">
                         <div>
@@ -177,14 +175,12 @@
             <h2 class="section-title serif" id="sectionTitle">Todas las Aplicaciones</h2>
         </div>
 
-        <!-- Cuadrícula Escalable -->
+        <!-- Cuadrícula General -->
         <div class="grid-recipes" id="recipesGrid">
             
             <!-- App 1: Mindfulness -->
             <a href="https://psicologojairoarboleda-prog.github.io/Mindfulnes-5-4-3-2-1/" class="recipe-card" data-category="mindfulness" data-title="tecnica mindfulness 5-4-3-2-1">
-                <div class="recipe-img-container">
-                    🧘‍♀️
-                </div>
+                <div class="recipe-img-container">🧘‍♀️</div>
                 <div class="recipe-content">
                     <div>
                         <span class="badge badge-mindfulness">Mindfulness</span>
@@ -197,9 +193,7 @@
 
             <!-- App 2: Somático -->
             <a href="https://psicologojairoarboleda-prog.github.io/Sincronizaci-n-Som-tica/" class="recipe-card" data-category="somatico" data-title="regulacion somatica srs">
-                <div class="recipe-img-container">
-                    🌊
-                </div>
+                <div class="recipe-img-container">🌊</div>
                 <div class="recipe-content">
                     <div>
                         <span class="badge badge-somatic">Somático</span>
@@ -212,9 +206,7 @@
 
             <!-- App 3: Respiración Cuadrada -->
             <a href="https://psicologojairoarboleda-prog.github.io/Respiraci-n-Cuadrada/" class="recipe-card" data-category="respiracion" data-title="respiracion cuadrada respiracion quadratica">
-                <div class="recipe-img-container">
-                    🟦
-                </div>
+                <div class="recipe-img-container">🟦</div>
                 <div class="recipe-content">
                     <div>
                         <span class="badge badge-cuadrada">Respiración</span>
@@ -226,10 +218,8 @@
             </a>
 
             <!-- App 4: Recetario -->
-            <a href="recetas.html" class="recipe-card" data-category="nutricion" data-title="recetas funcionales salud visual">
-                <div class="recipe-img-container">
-                    🥗
-                </div>
+            <a href="https://psicologojairoarboleda-prog.github.io/Recetario-alimentaci-n-funcional-orientada-a-la-salud-visual/" class="recipe-card" data-category="nutricion" data-title="recetas funcionales salud visual">
+                <div class="recipe-img-container">🥗</div>
                 <div class="recipe-content">
                     <div>
                         <span class="badge badge-recetas">Nutrición</span>
