@@ -45,7 +45,9 @@
         .section-title { font-size: 26px; font-weight: 700; margin-bottom: 24px; border-bottom: 2px solid #6b5b95; padding-bottom: 8px; display: inline-block; letter-spacing: -0.5px; }
 
         /* Carrusel Estilizado */
-        .carousel-wrapper { position: relative; margin-bottom: 60px; }
+        .carousel-wrapper { position: relative; margin-bottom: 60px; transition: opacity 0.3s ease, max-height 0.3s ease; overflow: hidden; }
+        .carousel-wrapper.hidden { display: none; }
+        
         .carousel { display: flex; gap: 24px; overflow-x: auto; scroll-behavior: smooth; padding-bottom: 14px; scrollbar-width: thin; }
         .carousel-card { min-width: 300px; max-width: 300px; background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid #E5E5E0; cursor: pointer; flex-shrink: 0; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1); text-decoration: none; color: inherit; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
         .carousel-card:hover { transform: translateY(-6px); box-shadow: 0 14px 30px rgba(0,0,0,0.08); }
@@ -283,7 +285,19 @@
         function handleSearch(query) {
             const filter = query.toLowerCase().trim();
             const cards = document.querySelectorAll('.recipe-card');
+            const carouselWrapper = document.getElementById('carouselWrapper');
+            const sectionTitle = document.getElementById('sectionTitle');
             
+            if (filter.length > 0) {
+                // Si hay texto buscando, ocultamos el carrusel y cambiamos el título de la sección
+                carouselWrapper.classList.add('hidden');
+                sectionTitle.textContent = "Resultados de Búsqueda";
+            } else {
+                // Si borran la búsqueda, devolvemos el carrusel y el título original
+                carouselWrapper.classList.remove('hidden');
+                sectionTitle.textContent = "Todas las Aplicaciones";
+            }
+
             cards.forEach(card => {
                 const title = card.getAttribute('data-title') || '';
                 if (title.includes(filter)) {
@@ -297,9 +311,14 @@
         function filterCategory(category) {
             const cards = document.querySelectorAll('.recipe-card');
             const sectionTitle = document.getElementById('sectionTitle');
+            const carouselWrapper = document.getElementById('carouselWrapper');
             
+            // Al elegir categoría por el menú lateral, también ocultamos el carrusel para enfocarnos en la categoría
+            carouselWrapper.classList.add('hidden');
+
             if (category === 'todos') {
                 sectionTitle.textContent = "Todas las Aplicaciones";
+                carouselWrapper.classList.remove('hidden'); // Si elige "todos", mostramos de nuevo el carrusel
             } else if (category === 'mindfulness') {
                 sectionTitle.textContent = "Mindfulness & Atención";
             } else if (category === 'somatico') {
